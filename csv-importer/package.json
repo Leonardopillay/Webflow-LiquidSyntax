@@ -1,0 +1,27 @@
+{
+  "name": "webflow-liquid-syntax-csv-importer",
+  "version": "1.0.0",
+  "description": "CLI tool to transform CSV into Webflow CMS–compatible JSON using a mapping config",
+  "bin": {
+    "webflow-csv-importer": "./cli.js"
+  },
+  "type": "module",
+  "scripts": {
+    "start": "node cli.js sample.csv map.json"
+  },
+  "keywords": [
+    "webflow",
+    "csv",
+    "cms",
+    "importer",
+    "cli"
+  ],
+  "author": "Bryce Wooster",
+  "license": "MIT",
+  "dependencies": {
+    "csv-parser": "^3.0.0"
+  },
+  "engines": {
+    "node": ">=16"
+  }
+}

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Webflow Live Reload Demo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body {
+      font-family: system-ui, sans-serif;
+      margin: 2rem;
+      background: #f9f9f9;
+    }
+    h1 {
+      color: #333;
+    }
+    button {
+      padding: 0.6rem 1.2rem;
+      font-size: 1rem;
+      background-color: #005ce6;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #003db3;
+    }
+    .status {
+      margin-top: 1rem;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>🔄 Webflow Live Reload</h1>
+  <p>This prototype adds instant JavaScript refresh behavior to Webflow Custom Code sections during development.</p>
+
+  <button id="toggleReload">Start Live Reload</button>
+  <div class="status" id="reloadStatus">Status: 🔴 Inactive</div>
+
+  <script>
+    let isActive = false;
+    let intervalId = null;
+
+    function checkAndReload() {
+      fetch(window.location.href, {cache: "no-store"})
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const doc = parser.parseFromString(html, "text/html");
+          const incoming = doc.querySelector("body").innerHTML;
+          const current = document.body.innerHTML;
+          if (incoming !== current) {
+            console.log("Content changed. Reloading...");
+            window.location.reload();
+          }
+        });
+    }
+
+    document.getElementById("toggleReload").addEventListener("click", () => {
+      isActive = !isActive;
+      const btn = document.getElementById("toggleReload");
+      const status = document.getElementById("reloadStatus");
+      if (isActive) {
+        btn.textContent = "Stop Live Reload";
+        status.textContent = "Status: 🟢 Active";
+        intervalId = setInterval(checkAndReload, 3000);
+      } else {
+        btn.textContent = "Start Live Reload";
+        status.textContent = "Status: 🔴 Inactive";
+        clearInterval(intervalId);
+      }
+    });
+  </script>
+</body>
+</html>

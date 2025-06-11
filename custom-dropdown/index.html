@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Custom Dropdown Demo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="dropdown.css">
+</head>
+<body>
+
+  <h1>Custom Dropdown (A11y + Mobile Friendly)</h1>
+
+  <div class="dropdown" id="customDropdown">
+    <button class="dropdown-toggle" aria-haspopup="listbox" aria-expanded="false" id="dropdownToggle">
+      Select an option
+    </button>
+    <ul class="dropdown-menu" role="listbox" tabindex="-1" aria-labelledby="dropdownToggle">
+      <li role="option" tabindex="0" data-value="option1">Option 1</li>
+      <li role="option" tabindex="0" data-value="option2">Option 2</li>
+      <li role="option" tabindex="0" data-value="option3">Option 3</li>
+    </ul>
+  </div>
+
+  <p id="selectedValue">Selected: None</p>
+
+  <script type="module" src="dropdown.js"></script>
+</body>
+</html>
